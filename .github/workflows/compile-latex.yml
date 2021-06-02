@@ -6,8 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Compile documents
-    env:
-      PURPLE_PATH: Purple Heart Lane
     steps:
     - uses: actions/checkout@v2
     - name: Init
@@ -42,7 +40,7 @@ jobs:
     - name: Compile Purple
       uses: ftsrg/document-converter-actions@master
       with:
-        makefile-arguments: -C "Purple Heart Lane"/src
+        makefile-arguments: -C Purple-Heart-Lane/src
 
     - name: Compile Sainte-Marie-du-Mont
       uses: ftsrg/document-converter-actions@master
@@ -68,7 +66,7 @@ jobs:
         mv Hürtgen-forest/pdf/*.pdf output/
         mv Omaha-Beach/pdf/*.pdf output/
         mv Sainte-Marie-du-Mont/pdf/*.pdf output/
-        mv ${PURPLE_PATH}/pdf/*.pdf output/
+        mv Purple-Heart-Lane/pdf/*.pdf output/
         mv Sainte-Mére-Église/pdf/*.pdf output/
         mv Utah-Beach/pdf/*.pdf output/
 
