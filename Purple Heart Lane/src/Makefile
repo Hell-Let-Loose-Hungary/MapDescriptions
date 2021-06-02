@@ -1,4 +1,4 @@
-DOCUMENT=Carentan
+DOCUMENT=PurpleHeartLane
 #MODE=-interaction=batchmode
 
 all: clean xelatex

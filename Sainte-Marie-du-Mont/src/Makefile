@@ -1,4 +1,4 @@
-DOCUMENT=Carentan
+DOCUMENT=SainteMarieduMont
 #MODE=-interaction=batchmode
 
 all: clean xelatex

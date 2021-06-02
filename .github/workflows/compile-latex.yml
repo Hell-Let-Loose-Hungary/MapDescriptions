@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   compile_Carentan:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Carentan
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -28,7 +28,7 @@ jobs:
   
   compile_Foy:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Foy
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -51,7 +51,7 @@ jobs:
   
   compile_Hill:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Hill400
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -74,7 +74,7 @@ jobs:
   
   compile_Hurtgen:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Hürtgen
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -97,7 +97,7 @@ jobs:
   
   compile_Omaha:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Omaha
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -120,7 +120,7 @@ jobs:
   
   compile_Purple:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Purple
     env:
       PURPLE_PATH: Purple Heart Lane
     steps:
@@ -145,7 +145,7 @@ jobs:
   
   compile_SMdM:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile SMdM
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -168,7 +168,7 @@ jobs:
   
   compile_SME:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile SME
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
@@ -191,7 +191,7 @@ jobs:
   
   compile_Utah:
     runs-on: ubuntu-latest
-    name: Compile document
+    name: Compile Utah
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker

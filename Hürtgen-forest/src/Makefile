@@ -1,4 +1,4 @@
-DOCUMENT=Carentan
+DOCUMENT=HurtgenForest
 #MODE=-interaction=batchmode
 
 all: clean xelatex

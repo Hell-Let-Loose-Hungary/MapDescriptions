@@ -1,4 +1,4 @@
-DOCUMENT=Carentan
+DOCUMENT=Foy
 #MODE=-interaction=batchmode
 
 all: clean xelatex
