@@ -15,7 +15,7 @@ jobs:
     - name: Compile deploy package
       run: |
         echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Carentan/pdf/README.md
-        rm beszamolo/pdf/.gitignore # otherwise PDF would be ignored
+        rm Carentan/pdf/.gitignore # otherwise PDF would be ignored
     - name: Deploy site and PDFs
       uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
       env:
