@@ -1,9 +1,9 @@
 
 ## Ingnore built pdfs
-HurtgenForest.pdf
-HurtgenForest-pdflatex*.pdf
-HurtgenForest-xelatex*.pdf
-HurtgenForest-lualatex*.pdf
+Foy.pdf
+Foy-pdflatex*.pdf
+Foy-xelatex*.pdf
+Foy-lualatex*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
