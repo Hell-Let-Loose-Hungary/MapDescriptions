@@ -3,209 +3,79 @@ name: Compile and deploy LaTeX document
 on: [push, pull_request]
 
 jobs:
-  compile_Carentan:
+  build:
     runs-on: ubuntu-latest
-    name: Compile Carentan
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
-      uses: ftsrg/document-converter-actions@master
-      with:
-        makefile-arguments: -C Carentan/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Carentan/pdf/README.md
-        rm Carentan/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Carentan/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Foy:
-    runs-on: ubuntu-latest
-    name: Compile Foy
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
-      uses: ftsrg/document-converter-actions@master
-      with:
-        makefile-arguments: -C Foy/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Foy/pdf/README.md
-        rm Foy/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Foy/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Hill:
-    runs-on: ubuntu-latest
-    name: Compile Hill400
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
-      uses: ftsrg/document-converter-actions@master
-      with:
-        makefile-arguments: -C Hill400/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Hill400/pdf/README.md
-        rm Hill400/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Hill400/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Hurtgen:
-    runs-on: ubuntu-latest
-    name: Compile Hürtgen
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
-      uses: ftsrg/document-converter-actions@master
-      with:
-        makefile-arguments: -C Hürtgen-forest/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Hürtgen-forest/pdf/README.md
-        rm Hürtgen-forest/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Hürtgen-forest/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Omaha:
-    runs-on: ubuntu-latest
-    name: Compile Omaha
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
-      uses: ftsrg/document-converter-actions@master
-      with:
-        makefile-arguments: -C Omaha-Beach/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Omaha-Beach/pdf/README.md
-        rm Omaha-Beach/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Omaha-Beach/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Purple:
-    runs-on: ubuntu-latest
-    name: Compile Purple
+    name: Compile documents
     env:
       PURPLE_PATH: Purple Heart Lane
     steps:
     - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
+    - name: Init
+      run: |
+        mkdir output
+    
+    - name: Compile Carentan
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Carentan/src
+
+    - name: Compile Foy
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Foy/src
+    
+    - name: Compile Hill
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Hill400/src
+
+    - name: Compile Hürtgen
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Hürtgen-forest/src
+
+    - name: Compile Omaha
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Omaha-Beach/src
+    
+    - name: Compile Purple
       uses: ftsrg/document-converter-actions@master
       with:
         makefile-arguments: -C ${PURPLE_PATH}/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > ${PURPLE_PATH}/pdf/README.md
-        rm ${PURPLE_PATH}/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: ${PURPLE_PATH}/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_SMdM:
-    runs-on: ubuntu-latest
-    name: Compile SMdM
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
+
+    - name: Compile Sainte-Marie-du-Mont
       uses: ftsrg/document-converter-actions@master
       with:
         makefile-arguments: -C Sainte-Marie-du-Mont/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Sainte-Marie-du-Mont/pdf/README.md
-        rm Sainte-Marie-du-Mont/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Sainte-Marie-du-Mont/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_SME:
-    runs-on: ubuntu-latest
-    name: Compile SME
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
+
+    - name: Compile Sainte-Mére-Église
       uses: ftsrg/document-converter-actions@master
       with:
         makefile-arguments: -C Sainte-Mére-Église/src
-    - name: Compile deploy package
-      run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Sainte-Mére-Église/pdf/README.md
-        rm Sainte-Mére-Église/pdf/.gitignore # otherwise PDF would be ignored
-    - name: Deploy site and PDFs
-      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
-      env:
-        BUILD_DIR: Sainte-Mére-Église/pdf/
-        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
-      # https://github.com/marketplace/actions/twitter-together#setup
-      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
-      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  
-  compile_Utah:
-    runs-on: ubuntu-latest
-    name: Compile Utah
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build PDFs with the LaTeX engine in Docker
+    
+    - name: Compile Utah-Beach
       uses: ftsrg/document-converter-actions@master
       with:
         makefile-arguments: -C Utah-Beach/src
-    - name: Compile deploy package
+
+    - name: Cleanup
       run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Utah-Beach/pdf/README.md
-        rm Utah-Beach/pdf/.gitignore # otherwise PDF would be ignored
+        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > output/README.md
+        mv Carentan/pdf/*.pdf output/
+        mv Foy/pdf/*.pdf output/
+        mv Hill400/pdf/*.pdf output/
+        mv Hürtgen-forest/pdf/*.pdf output/
+        mv Omaha-Beach/pdf/*.pdf output/
+        mv Sainte-Marie-du-Mont/pdf/*.pdf output/
+        mv ${PURPLE_PATH}/pdf/*.pdf output/
+        mv Sainte-Mére-Église/pdf/*.pdf output/
+        mv Utah-Beach/pdf/*.pdf output/
+
     - name: Deploy site and PDFs
       uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
       env:
-        BUILD_DIR: Utah-Beach/pdf/
+        BUILD_DIR: output/
         GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
       # https://github.com/marketplace/actions/twitter-together#setup
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
