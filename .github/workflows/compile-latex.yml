@@ -1,0 +1,27 @@
+name: Compile and deploy LaTeX document
+
+on: [push, pull_request]
+
+jobs:
+  compile_document:
+    runs-on: ubuntu-latest
+    name: Compile document
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build PDFs with the LaTeX engine in Docker
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Carentan/src
+    - name: Compile deploy package
+      run: |
+        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > Carentan/pdf/README.md
+        rm beszamolo/pdf/.gitignore # otherwise PDF would be ignored
+    - name: Deploy site and PDFs
+      uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
+      env:
+        BUILD_DIR: Carentan/pdf/
+        GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
+      # https://github.com/marketplace/actions/twitter-together#setup
+      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
+      # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
