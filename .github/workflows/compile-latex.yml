@@ -42,7 +42,7 @@ jobs:
     - name: Compile Purple
       uses: ftsrg/document-converter-actions@master
       with:
-        makefile-arguments: -C ${PURPLE_PATH}/src
+        makefile-arguments: -C "Purple Heart Lane"/src
 
     - name: Compile Sainte-Marie-du-Mont
       uses: ftsrg/document-converter-actions@master
