@@ -61,12 +61,12 @@ test_en:
 	${MAKE} switch_to_hungarian
 
 switch_to_singlesided:
-	sed -i "s|^%\\\documentclass\[11pt,a4paper,oneside|\\\documentclass[11pt,a4paper,oneside|" $(DOCUMENT).tex
-	sed -i "s|^\\\documentclass\[11pt,a4paper,twoside|%\\\documentclass[11pt,a4paper,twoside|" $(DOCUMENT).tex
+	sed -i "s|^%\\\documentclass\[12pt,a4paper,oneside|\\\documentclass[12pt,a4paper,oneside|" $(DOCUMENT).tex
+	sed -i "s|^\\\documentclass\[12pt,a4paper,twoside|%\\\documentclass[12pt,a4paper,twoside|" $(DOCUMENT).tex
 
 switch_to_duplex:
-	sed -i "s|^\\\documentclass\[11pt,a4paper,oneside|%\\\documentclass[11pt,a4paper,oneside|" $(DOCUMENT).tex
-	sed -i "s|^%\\\documentclass\[11pt,a4paper,twoside|\\\documentclass[11pt,a4paper,twoside|" $(DOCUMENT).tex
+	sed -i "s|^\\\documentclass\[12pt,a4paper,oneside|%\\\documentclass[12pt,a4paper,oneside|" $(DOCUMENT).tex
+	sed -i "s|^%\\\documentclass\[12pt,a4paper,twoside|\\\documentclass[12pt,a4paper,twoside|" $(DOCUMENT).tex
 
 test_duplex:
 	${MAKE} switch_to_duplex
