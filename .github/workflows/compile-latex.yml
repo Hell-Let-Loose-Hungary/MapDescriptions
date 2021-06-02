@@ -25,6 +25,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Foy:
     runs-on: ubuntu-latest
     name: Compile document
@@ -47,6 +48,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Hill:
     runs-on: ubuntu-latest
     name: Compile document
@@ -69,6 +71,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Hurtgen:
     runs-on: ubuntu-latest
     name: Compile document
@@ -91,6 +94,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Omaha:
     runs-on: ubuntu-latest
     name: Compile document
@@ -113,28 +117,32 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Purple:
     runs-on: ubuntu-latest
     name: Compile document
+    env:
+      PURPLE_PATH: Purple Heart Lane
     steps:
     - uses: actions/checkout@v2
     - name: Build PDFs with the LaTeX engine in Docker
       uses: ftsrg/document-converter-actions@master
       with:
-        makefile-arguments: -C 'Purple Heart Lane'/src
+        makefile-arguments: -C ${PURPLE_PATH}/src
     - name: Compile deploy package
       run: |
-        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > 'Purple Heart Lane'/pdf/README.md
-        rm 'Purple Heart Lane'/pdf/.gitignore # otherwise PDF would be ignored
+        echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > ${PURPLE_PATH}/pdf/README.md
+        rm ${PURPLE_PATH}/pdf/.gitignore # otherwise PDF would be ignored
     - name: Deploy site and PDFs
       uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
       env:
-        BUILD_DIR: 'Purple Heart Lane'/pdf/
+        BUILD_DIR: ${PURPLE_PATH}/pdf/
         GH_PAT: x-access-token:${{ secrets.GITHUB_TOKEN }}
       # https://github.com/marketplace/actions/twitter-together#setup
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_SMdM:
     runs-on: ubuntu-latest
     name: Compile document
@@ -157,6 +165,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_SME:
     runs-on: ubuntu-latest
     name: Compile document
@@ -179,6 +188,7 @@ jobs:
       # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
       # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  
   compile_Utah:
     runs-on: ubuntu-latest
     name: Compile document
