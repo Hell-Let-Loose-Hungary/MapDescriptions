@@ -57,6 +57,11 @@ jobs:
       with:
         makefile-arguments: -C Utah-Beach/src
 
+    - name: Compile Stalingrad
+      uses: ftsrg/document-converter-actions@master
+      with:
+        makefile-arguments: -C Stalingrad/src
+
     - name: Cleanup
       run: |
         echo "https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" > output/README.md
@@ -69,6 +74,7 @@ jobs:
         mv Purple-Heart-Lane/pdf/*.pdf output/
         mv Sainte-Mére-Église/pdf/*.pdf output/
         mv Utah-Beach/pdf/*.pdf output/
+        mv Stalingrad/pdf/*.pdf output/
 
     - name: Deploy site and PDFs
       uses: maxheld83/ghpages@68f783a4f5313d776c1599e18479607e71c9c738  # v0.3.0
