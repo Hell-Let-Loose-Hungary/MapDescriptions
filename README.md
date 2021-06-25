@@ -13,3 +13,4 @@ A legfrissebb PDF kimenetek a buildről:
 * [`[Sainte-Marie-du-Mont ismertető]`](https://hell-let-loose-hungary.github.io/MapDescriptions/SainteMarieduMont.pdf)
 * [`[Sainte-Mére-Église ismertető]`](https://hell-let-loose-hungary.github.io/MapDescriptions/SainteMereEglise.pdf)
 * [`[Utah partszakasz ismertető]`](https://hell-let-loose-hungary.github.io/MapDescriptions/UtahBeach.pdf)
+* [`[Sztálingrád ismertető]`](https://hell-let-loose-hungary.github.io/MapDescriptions/Stalingrad.pdf)
